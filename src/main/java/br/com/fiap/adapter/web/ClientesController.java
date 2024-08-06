@@ -39,7 +39,7 @@ public class ClientesController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Objeto contendo as informações do cliente cadastrado"),
-            @ApiResponse(responseCode = "422", description = "Ocorreu um erro ao processar o cadastro do cliente"),
+            @ApiResponse(responseCode = "400", description = "Ocorreu um erro ao processar o cadastro do cliente"),
     })
     public ResponseEntity<AppResponse<ClienteResponse>> registerCustomer(HttpServletRequest request,
                                                                          @RequestBody ClienteRegisterRequest clienteRegisterRequest) {
@@ -56,10 +56,10 @@ public class ClientesController {
         } catch (PersistenceException ex) {
             AppResponse<ClienteResponse> response = ResponseUtil.error(ex.getCause().getLocalizedMessage(),
                     ex.getLocalizedMessage(),
-                    HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                    HttpStatus.BAD_REQUEST.value(),
                     request.getRequestURL().toString());
 
-            return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
