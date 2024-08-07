@@ -21,13 +21,10 @@ spring:
     password: "fs2024"
 
   jpa:
+    open-in-view: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
-    format-sql: true
 
 logging:
   level:
