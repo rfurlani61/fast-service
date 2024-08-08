@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  error:
+    path: /error
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: "fast-service"
+
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/fast-service"
+    username: "fast-service-user"
+    password: "fs2024"
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+logging:
+  level:
+    root: info
