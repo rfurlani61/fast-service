@@ -49,7 +49,7 @@ public class ProdutosController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Objeto contendo as informações do produto cadastrado"),
-            @ApiResponse(responseCode = "422", description = "Ocorreu um erro ao processar o cadastro do produto"),
+            @ApiResponse(responseCode = "404", description = "Ocorreu um erro ao processar o cadastro do produto"),
     })
     public ResponseEntity<AppResponse<ProdutoResponse>> createProduct(HttpServletRequest request,
                                                                       @RequestBody ProdutoCreateRequest produtoCreateRequest) {
@@ -66,10 +66,10 @@ public class ProdutosController {
         } catch (PersistenceException ex) {
             AppResponse<ProdutoResponse> response = ResponseUtil.error(ex.getCause().getLocalizedMessage(),
                     ex.getLocalizedMessage(),
-                    HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                    HttpStatus.BAD_REQUEST.value(),
                     request.getRequestURL().toString());
 
-            return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -79,7 +79,7 @@ public class ProdutosController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Objeto contendo as informações do produto alterado"),
-            @ApiResponse(responseCode = "422", description = "Ocorreu um erro ao processar a alteração do produto"),
+            @ApiResponse(responseCode = "400", description = "Ocorreu um erro ao processar a alteração do produto"),
     })
     public ResponseEntity<AppResponse<ProdutoResponse>> updateProduct(HttpServletRequest request,
                                                                       @RequestBody ProdutoUpdateRequest produtoUpdateRequest) {
@@ -96,10 +96,10 @@ public class ProdutosController {
         } catch (PersistenceException ex) {
             AppResponse<ProdutoResponse> response = ResponseUtil.error(ex.getCause().getLocalizedMessage(),
                     ex.getLocalizedMessage(),
-                    HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                    HttpStatus.BAD_REQUEST.value(),
                     request.getRequestURL().toString());
 
-            return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
